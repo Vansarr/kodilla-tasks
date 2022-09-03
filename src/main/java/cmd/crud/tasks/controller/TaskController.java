@@ -14,7 +14,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/v1/tasks/")
+@RequestMapping("/v1/tasks")
 @RequiredArgsConstructor
 public class TaskController {
 
@@ -27,12 +27,12 @@ public class TaskController {
         return ResponseEntity.ok(taskMapper.mapToTaskDtoList(tasks));
     }
 
-    @GetMapping("{taskId}")
+    @GetMapping("/{taskId}")
     public ResponseEntity<TaskDto> getTask(@PathVariable Long taskId) throws TaskNotFoundException {
             return  ResponseEntity.ok(taskMapper.mapToTaskDto(service.getTask(taskId)));
     }
 
-    @DeleteMapping("{taskId}")
+    @DeleteMapping("/{taskId}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long taskId) {
         service.deleteTask(taskId);
         return ResponseEntity.ok().build();
