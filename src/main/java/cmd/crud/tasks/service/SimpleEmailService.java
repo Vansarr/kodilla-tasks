@@ -1,6 +1,7 @@
 package cmd.crud.tasks.service;
 
 import cmd.crud.tasks.domain.Mail;
+import com.sun.istack.Nullable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.MailException;
@@ -32,6 +33,10 @@ public class SimpleEmailService {
         mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
+        if (mail.getToCc().isPresent()) {
+            mailMessage.setCc((mail.getToCc().get()));
+        }
         return mailMessage;
     }
+
 }
